@@ -2,4 +2,4 @@
 A Half-Life 2: Deathmatch command-line map search tool.
 Run in node.js.
 
-Dependencies are: readline-sync, http, fs.
+Dependencies are: readline-sync, http, fs, sha256.
