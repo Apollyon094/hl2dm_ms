@@ -1,18 +1,15 @@
 const ht = require("http");
 const fs = require("fs");
 const rl = require("readline-sync");
-
-function repeat(func, times) {
-    func();
-    times && --times && repeat(func, times);
+const sh = require("sha256");
+async function repeat(func, times) {
+    await func();
+    times && --times && await repeat(func, times);
 }
 
 const name = rl.question("Enter a map name. \n");
 const fastdls = ["http://fusionheadweb.site.nfoservers.com/maps/", "http://gawp.fastdl.scorpex.org/maps/", "http://outlaw.fastdl.scorpex.org/maps/", "http://clans.playugh.com/66f1190c/hl2dm/maps/"];
-var cheese = 0;
-
-const file = fs.createWriteStream("./" + name + "_" + cheese + ".bsp.bz2");
-
+const file = fs.createWriteStream("./" + name + ".bsp.bz2");
 function request(foo, bar) {
 	ht.get(fastdls[foo] + bar +  ".bsp.bz2", function(response) {
 		response.pipe(file);
@@ -20,10 +17,4 @@ function request(foo, bar) {
 	})
 }
 
-function mycodeisreallyterrible() {
-	const file = fs.createWriteStream("./" + name + "_" + cheese + ".bsp.bz2");
-	request(cheese, name);
-	cheese++;
-}
-
-repeat(mycodeisreallyterrible, 4);
+request(0, name);
