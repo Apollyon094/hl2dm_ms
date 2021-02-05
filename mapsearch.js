@@ -1,7 +1,6 @@
 const ht = require("http");
 const fs = require("fs");
 const rl = require("readline-sync");
-const sh = require("sha256");
 async function repeat(func, times) {
     await func();
     times && --times && await repeat(func, times);
